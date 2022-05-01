@@ -25,7 +25,7 @@ public class PartyHallController {
     private PartyHallService partyHallService;
     
     @GetMapping
-    public ResponseEntity<List<PartyHall>> getAllPartuHalls() {
+    public ResponseEntity<List<PartyHall>> getAllPartyHalls() {
         List<PartyHall> partyHalls = partyHallService.getAllPartyHalls();
 
         return ResponseEntity.ok(partyHalls);
