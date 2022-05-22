@@ -2,11 +2,11 @@ package com.felipesalles.msrental.service;
 
 import java.util.List;
 
-// import com.felipesalles.msrental.Order;
+import com.felipesalles.msrental.Order;
 import com.felipesalles.msrental.entities.PartyHall;
 import com.felipesalles.msrental.entities.DTO.OrderDTO;
 import com.felipesalles.msrental.feignclients.PartyHallFeignClients;
-// import com.felipesalles.msrental.producer.OrderProducer;
+import com.felipesalles.msrental.producer.OrderProducer;
 import com.felipesalles.msrental.repositories.OrderRepository;
 
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class RentalPartyHallService {
 
     private OrderRepository orderRepository;
 
-    // private OrderProducer orderProducer;
+    private OrderProducer orderProducer;
 
     public List<PartyHall> getAllPartyHalls() {
         List<PartyHall> partyHalls = partyHallFeignClients.getAllPartyHalls().getBody();
@@ -41,20 +41,20 @@ public class RentalPartyHallService {
         orderDto.setTotalValue(totalValue);
         var newOrder =  orderRepository.save(orderDto.fromDtoToOrder());
         orderDto.setId(newOrder.getId());
-        // sendMessage(orderDto);
+        sendMessage(orderDto);
     }
 
-    // private void sendMessage(OrderDTO orderDTO) {
-    //     var message = Order.newBuilder()
-    //                     .setId(orderDTO.getId())
-    //                     .setPartyHallId(orderDTO.getPartyHallId())
-    //                     // .setDate(orderDTO.getDate().toString())
-    //                     .setQtGuests(orderDTO.getQtGuests())
-    //                     .setTotalValue(orderDTO.getTotalValue())
-    //                     .build();
-    //     log.info("Order: " + message);
-    //     orderProducer.sendMessage(message);
-    // }
+    private void sendMessage(OrderDTO orderDTO) {
+        var message = Order.newBuilder()
+                        .setId(orderDTO.getId())
+                        .setPartyHallId(orderDTO.getPartyHallId())
+                        // .setDate(orderDTO.getDate().toString())
+                        .setQtGuests(orderDTO.getQtGuests())
+                        .setTotalValue(orderDTO.getTotalValue())
+                        .build();
+        log.info("Order: " + message);
+        orderProducer.sendMessage(message);
+    }
 
     private Double calculatePartyValue(Double valuePerGuest, Integer qtGuests) {
         return valuePerGuest * qtGuests;

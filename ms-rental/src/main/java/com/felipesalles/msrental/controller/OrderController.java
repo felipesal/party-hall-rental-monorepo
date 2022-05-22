@@ -3,7 +3,6 @@ package com.felipesalles.msrental.controller;
 import java.net.URI;
 import java.util.List;
 
-import com.felipesalles.msrental.entities.Order;
 import com.felipesalles.msrental.entities.PartyHall;
 import com.felipesalles.msrental.entities.DTO.OrderDTO;
 import com.felipesalles.msrental.service.RentalPartyHallService;

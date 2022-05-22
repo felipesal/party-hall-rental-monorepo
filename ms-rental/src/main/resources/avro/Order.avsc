@@ -1,0 +1,23 @@
+{
+    "type":"record",
+    "name":"Order",
+    "namespace":"com.felipesalles.msrental",
+    "fields":[
+        {
+            "name":"id",
+            "type":"long"
+        },
+        {
+            "name":"qtGuests",
+            "type":"int"
+        },
+        {
+            "name":"totalValue",
+            "type":"double"
+        },
+        {
+            "name":"partyHallId",
+            "type":"long"
+        }
+    ]
+}
